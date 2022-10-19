@@ -1,0 +1,81 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+  border-radius: 12px;
+  height: 400px;
+  min-width: 20%;
+  background-color: whitesmoke;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+.login-title {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+form {
+  display: flex;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  width: 200px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+input {
+  padding: 0.35rem;
+  font-family: "Inter", sans-serif;
+  margin: 0.75rem 0;
+  border-radius: 4px;
+  width: 100%;
+  border: 1px solid rgb(228, 196, 196);
+}
+button {
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  align-self: center;
+  margin-top: 1rem;
+  font-size: 1rem;
+  padding: 0.65rem;
+  border-radius: 4px;
+  color: white;
+  background-color: rgb(63, 63, 201);
+  transition: 0.3s;
+  font-weight: bold;
+}
+button:hover {
+  background-color: rgb(23, 23, 110);
+}
+.line {
+  align-items: center;
+  border-bottom: 1px solid #dadde1;
+  display: flex;
+  margin: 20px 16px;
+  text-align: center;
+  width: 80%;
+}
+.login-register {
+  margin: 0rem 1rem 0 1rem;
+  font-size: 1rem;
+}
+.login-register-link {
+  background-color: #36a420;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 1rem;
+  border-radius: 6px;
+  color: white;
+  font-size: 1rem;
+  padding: 10px 16px;
+  width: 70%;
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+.login-register-link:hover {
+  background-color: #278015;
+}
