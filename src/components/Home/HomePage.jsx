@@ -72,18 +72,21 @@ export default function HomePage() {
     }, [])
     return (
 
-        <div style={{ height: 400, width: '80%', backgroundColor: "white", marginTop: "50px" }}>
+        <div >
 
             {user?.user.role === "Admin" ? (
                 <>
-                    <DataGrid
-                        rows={userList}
-                        columns={columns}
-                        pageSize={5}
-                        rowsPerPageOptions={[5]}
-                        checkboxSelection
-                    />
-                    <p className="navbar-user">{`Your role is Adminitrastor`}  </p>
+                    <div style={{ height: 400, width: '1000px', backgroundColor: "white", marginTop: "50px" }}>
+                        <DataGrid
+                            rows={userList}
+                            columns={columns}
+                            pageSize={5}
+                            rowsPerPageOptions={[5]}
+                            checkboxSelection
+                        />
+                        <p className="navbar-user">{`Your role is Adminitrastor`}  </p>
+                    </div>
+
                 </>
             ) : (
                 <>

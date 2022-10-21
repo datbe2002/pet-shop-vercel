@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import "./navbar.css";
 const NavBar = () => {
     // const [user, setUSer] = useState("Datbe");
-    const user = useSelector((state) => state.auth.login.currentUser);
+    const user = useSelector((state) => state.auth.login?.currentUser);
     return (
         <nav className="navbar-container">
             <Link to="/" className="navbar-home"> Home </Link>
             {user ? (
                 <>
 
-                    <img className="navbar-avatar" style={{ borderRadius: "100px", height: "50px", width: "50px" }} src={user.user.avatar} />
+                    <img className="navbar-avatar" style={{ borderRadius: "100px", height: "50px", width: "50px" }} src={user?.user.avatar} />
                     <p className="navbar-user">Hello <span> {user.user.fullName}  </span> </p>
                     <Link to="/logout" className="navbar-logout"> Log out</Link>
                 </>
