@@ -1,8 +1,7 @@
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { loginUser } from "../../../Redux/apiRequest";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 
@@ -10,7 +9,9 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [loginError, setLoginError] = useState("");
+    // const [loginError, setLoginError] = useState("");
+    const msg = useSelector((state) => state.auth?.msg)
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -46,12 +47,12 @@ const Login = () => {
     return (
         <section className="login-container">
             <form onSubmit={formik.handleSubmit}>
-                <div className="login-title">MEGAPET Store</div>
+                <div className="login-title">MEGAPET</div>
                 <input type="text" placeholder="Enter your email" name="email" value={formik.values.email} onChange={formik.handleChange} />
-                {formik.errors.email}
+                {formik.touched.email && <div style={{ color: "red" }}>{formik.errors.email}</div>}
                 <input type="password" placeholder="Enter your password" name="password" value={formik.values.password} onChange={formik.handleChange} />
-                {formik.errors.password}
-
+                {formik.touched.password && <div style={{ color: "red" }}>{formik.errors.password}</div>}
+                <div style={{ color: "red" }}>{msg.message}</div>
                 <button type="submit"> Log in </button>
             </form>
             <div className="line"></div>

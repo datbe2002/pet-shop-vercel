@@ -6,8 +6,18 @@ import {
   registerStart,
   registerSuccess,
   registerFailed,
+  logOutStart,
+  logOutSuccess,
+  logOutFailed,
 } from "./authSlice";
-import { getUsersFailed, getUsersStart, getUsersSuccess } from "./userSlice";
+import {
+  deleteUserFailed,
+  deleteUserStart,
+  deleteUserSuccess,
+  getUsersFailed,
+  getUsersStart,
+  getUsersSuccess,
+} from "./userSlice";
 
 export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
@@ -15,9 +25,14 @@ export const loginUser = async (user, dispatch, navigate) => {
     const res = await axios.post("http://localhost:8000/api/login", user);
 
     dispatch(loginSuccess(res.data));
-    navigate("/");
+
+    if (res.data.user?.role === "Admin") {
+      navigate("/");
+    } else {
+      navigate("/user");
+    }
   } catch (err) {
-    dispatch(loginFailed());
+    dispatch(loginFailed(err.response.data));
   }
 };
 
@@ -41,5 +56,27 @@ export const getAllUsers = async (accessToken, dispatch) => {
     dispatch(getUsersSuccess(res.data.users));
   } catch (err) {
     dispatch(getUsersFailed());
+  }
+};
+
+export const deleteUser = async (id, accessToken, dispatch) => {
+  dispatch(deleteUserStart());
+  try {
+    const res = await axios.delete("http://localhost:8000/api/user/" + id, {
+      headers: { Authorization: "Bearer " + accessToken },
+    });
+    dispatch(deleteUserSuccess(res.data));
+    getAllUsers(accessToken, dispatch);
+  } catch (error) {
+    dispatch(deleteUserFailed(error.response.data));
+  }
+};
+export const logOut = async (navigate, dispatch) => {
+  dispatch(logOutStart());
+  try {
+    dispatch(logOutSuccess());
+    navigate("/login");
+  } catch (error) {
+    dispatch(logOutFailed());
   }
 };
