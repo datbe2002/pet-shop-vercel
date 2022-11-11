@@ -17,19 +17,25 @@ import {
   getUsersFailed,
   getUsersStart,
   getUsersSuccess,
+  updateUserFailed,
+  updateUserStart,
+  updateUserSuccess,
 } from "./userSlice";
 
 export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
   try {
-    const res = await axios.post("http://localhost:8000/api/login", user);
+    const res = await axios.post(
+      "https://pet-shop-mini.herokuapp.com/api/login",
+      user
+    );
     console.log(user);
     dispatch(loginSuccess(res.data));
 
     if (res.data.user?.role === "Admin") {
-      navigate("/");
+      navigate("/dashboard");
     } else {
-      navigate("/user");
+      navigate("/");
     }
   } catch (err) {
     dispatch(loginFailed(err.response.data));
@@ -40,17 +46,24 @@ export const registerUser = (user, dispatch, navigate) => {
   dispatch(registerStart());
 
   axios
-    .post("http://localhost:8000/api/register", user)
-    .then(() => dispatch(registerSuccess()), navigate("/login"))
+    .post("https://pet-shop-mini.herokuapp.com/api/register", user)
+    .then(
+      () => dispatch(registerSuccess()),
+
+      navigate("/login")
+    )
     .catch((err) => dispatch(registerFailed()));
 };
 
 export const getAllUsers = async (accessToken, dispatch) => {
   dispatch(getUsersStart());
   try {
-    const res = await axios.get("http://localhost:8000/api/user", {
-      headers: { Authorization: "Bearer " + accessToken },
-    });
+    const res = await axios.get(
+      "https://pet-shop-mini.herokuapp.com/api/user",
+      {
+        headers: { Authorization: "Bearer " + accessToken },
+      }
+    );
     // console.log(res.data.users);
 
     dispatch(getUsersSuccess(res.data.users));
@@ -62,12 +75,16 @@ export const getAllUsers = async (accessToken, dispatch) => {
 export const deleteUser = async (id, accessToken, dispatch) => {
   dispatch(deleteUserStart());
   try {
-    const res = await axios.delete("http://localhost:8000/api/user/" + id, {
-      headers: { Authorization: "Bearer " + accessToken },
-    });
+    const res = await axios.delete(
+      `https://pet-shop-mini.herokuapp.com/api/user/${id}`,
+      {
+        headers: { Authorization: "Bearer " + accessToken },
+      }
+    );
     dispatch(deleteUserSuccess(res.data));
     getAllUsers(accessToken, dispatch);
   } catch (error) {
+    console.log(error.response.data);
     dispatch(deleteUserFailed(error.response.data));
   }
 };
@@ -78,5 +95,19 @@ export const logOut = async (navigate, dispatch) => {
     navigate("/login");
   } catch (error) {
     dispatch(logOutFailed());
+  }
+};
+
+export const updateUser = async (dispatch, user) => {
+  dispatch(updateUserStart());
+  try {
+    const res = await axios.patch(
+      `https://pet-shop-mini.herokuapp.com/api/user/update`,
+      user
+    );
+    dispatch(updateUserSuccess(res.data));
+    getAllUsers(dispatch);
+  } catch (error) {
+    dispatch(updateUserFailed(error.response.data));
   }
 };

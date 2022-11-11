@@ -7,6 +7,7 @@ const NavBar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const user = useSelector((state) => state.auth.login?.currentUser);
+    console.log(user)
     const handleLogout = () => {
         logOut(navigate, dispatch);
     }
@@ -17,17 +18,28 @@ const NavBar = () => {
             {user?.user.role === "Admin" ? (
                 <>
                     <Link to="/" className="navbar-home"> Home</Link>
-
+                    <Link to="/dashboard" className="navbar-logout"> Dashboard</Link>
                     <img className="navbar-avatar" style={{ borderRadius: "100px", height: "50px", width: "50px" }} src={user?.user.avatar} alt="Avatar" />
-                    <p className="navbar-user">Hello <span> {user.user.fullName}  </span> </p>
+                    <p className="navbar-user">Hello <span> {user?.user.fullName}  </span> </p>
                     <Link to="/login" className="navbar-logout" onClick={handleLogout}> Log out</Link>
                 </>
             ) : (
-                <>
-                    <Link to="/register" className="navbar-register"> Register</Link>
-                    <Link to="/login" className="navbar-login"> Login </Link>
-                    <Link to="/user" className="navbar-logout"> User</Link>
+
+                user?.user.role === "User" ? (<>
+                    <Link to="/" className="navbar-logout"> Home</Link>
+
+                    <img className="navbar-avatar" style={{ borderRadius: "100px", height: "50px", width: "50px" }} src={user?.user.avatar} alt="Avatar" />
+                    <p className="navbar-user">Hello <span> {user?.user.fullName}  </span> </p>
+                    <Link to="/login" className="navbar-logout" onClick={handleLogout}> Log out</Link>
+
+                </>) : (<>
+                    <Link to="/" className="navbar-logout"> Home</Link>
+                    <Link to="/login" className="navbar-logout"> Login</Link>
+                    <Link to="/register" className="navbar-logout"> Register</Link>
                 </>
+
+                )
+
             )}
         </nav>
     );
