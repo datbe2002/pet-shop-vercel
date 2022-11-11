@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { deleteUser, getAllUsers } from '../../Redux/apiRequest';
+import { deleteUser, getAllCategory, getAllUsers } from '../../Redux/apiRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper } from '@mui/material'
@@ -12,6 +12,7 @@ import { Grid } from '@mui/material';
 
 import { useState } from 'react';
 import UserModify from './UserModify';
+import CategoryModify from './CategoryModify';
 
 
 
@@ -81,6 +82,7 @@ export default function Dashboard() {
 
 
                 {choice === "User" && <UserModify></UserModify>}
+                {choice === "Category" && <CategoryModify></CategoryModify>}
 
 
 

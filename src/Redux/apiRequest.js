@@ -11,6 +11,14 @@ import {
   logOutFailed,
 } from "./authSlice";
 import {
+  getCateFailed,
+  getCateStart,
+  getCateSuccess,
+  updateCateFailed,
+  updateCateStart,
+  updateCateSuccess,
+} from "./cateSlice";
+import {
   deleteUserFailed,
   deleteUserStart,
   deleteUserSuccess,
@@ -88,6 +96,7 @@ export const deleteUser = async (id, accessToken, dispatch) => {
     dispatch(deleteUserFailed(error.response.data));
   }
 };
+
 export const logOut = async (navigate, dispatch) => {
   dispatch(logOutStart());
   try {
@@ -106,8 +115,37 @@ export const updateUser = async (dispatch, user) => {
       user
     );
     dispatch(updateUserSuccess(res.data));
-    getAllUsers(dispatch);
+    // getAllUsers(process.env.TOKEN, dispatch);
   } catch (error) {
     dispatch(updateUserFailed(error.response.data));
+  }
+};
+
+export const getAllCategory = async (accessToken, dispatch) => {
+  dispatch(getCateStart());
+  try {
+    const res = await axios.get(
+      "https://pet-shop-mini.herokuapp.com/api/category",
+      {
+        headers: { Authorization: "Bearer " + accessToken },
+      }
+    );
+    dispatch(getCateSuccess(res.data));
+  } catch (err) {
+    dispatch(getCateFailed(err.response.data));
+  }
+};
+
+export const updateCategory = async (dispatch, category) => {
+  dispatch(updateCateStart());
+  try {
+    const res = await axios.patch(
+      `https://pet-shop-mini.herokuapp.com/api/category/update`,
+      category
+    );
+    dispatch(updateCateSuccess(res.data));
+    // getAllCategory(process.env.TOKEN, dispatch);
+  } catch (error) {
+    dispatch(updateCateFailed(error.response.data));
   }
 };
