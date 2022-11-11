@@ -23,7 +23,7 @@ export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
   try {
     const res = await axios.post("http://localhost:8000/api/login", user);
-
+    console.log(user);
     dispatch(loginSuccess(res.data));
 
     if (res.data.user?.role === "Admin") {
@@ -42,7 +42,7 @@ export const registerUser = (user, dispatch, navigate) => {
   axios
     .post("http://localhost:8000/api/register", user)
     .then(() => dispatch(registerSuccess()), navigate("/login"))
-    .catch((err) => dispatch(registerFailed(err.response.data.message)));
+    .catch((err) => dispatch(registerFailed()));
 };
 
 export const getAllUsers = async (accessToken, dispatch) => {
