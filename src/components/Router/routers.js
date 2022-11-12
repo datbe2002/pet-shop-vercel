@@ -7,6 +7,7 @@ import Register from "../Auth/Register/Register";
 import Dashboard from "../AdminSection/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import HomePage from "../Home/HomePage";
+import PetDetailPage from "../Home/PetDetailPage";
 
 export default function Router() {
   const element = useRoutes([
@@ -21,6 +22,10 @@ export default function Router() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/pet-detail/:id",
+      element: <PetDetailPage />,
     },
 
     {

@@ -13,6 +13,7 @@ import { Grid } from '@mui/material';
 import { useState } from 'react';
 import UserModify from './UserModify';
 import CategoryModify from './CategoryModify';
+import PetModify from './PetModify';
 
 
 
@@ -83,6 +84,7 @@ export default function Dashboard() {
 
                 {choice === "User" && <UserModify></UserModify>}
                 {choice === "Category" && <CategoryModify></CategoryModify>}
+                {choice === "Pet" && <PetModify></PetModify>}
 
 
 

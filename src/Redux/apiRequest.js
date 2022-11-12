@@ -13,7 +13,6 @@ import {
 import {
   createNewCateFailed,
   createNewCateStart,
-  createNewCateStartFailed,
   createNewCateSuccess,
   deleteCateFailed,
   deleteCateStart,
@@ -26,6 +25,14 @@ import {
   updateCateSuccess,
 } from "./cateSlice";
 import {
+  deletePetFailed,
+  deletePetStart,
+  deletePetSuccess,
+  getPetFailed,
+  getPetStart,
+  getPetSuccess,
+} from "./petSlice";
+import {
   deleteUserFailed,
   deleteUserStart,
   deleteUserSuccess,
@@ -36,6 +43,8 @@ import {
   updateUserStart,
   updateUserSuccess,
 } from "./userSlice";
+
+axios.defaults.headers.post["Content-Type"] = "application/json";
 
 export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
@@ -128,6 +137,8 @@ export const updateUser = async (dispatch, user) => {
   }
 };
 
+//=================================================================
+
 export const getAllCategory = async (accessToken, dispatch) => {
   dispatch(getCateStart());
   try {
@@ -181,7 +192,6 @@ export const createCategory = (dispatch, category, accessToken) => {
     .post("https://pet-shop-mini.herokuapp.com/api/category", category, {
       headers: {
         Authorization: "Bearer " + accessToken,
-        "Content-Type": "application/json;charset=UTF-8",
         "Access-Control-Allow-Origin": "*",
       },
     })
@@ -189,4 +199,30 @@ export const createCategory = (dispatch, category, accessToken) => {
       dispatch(createNewCateSuccess(), getAllCategory(accessToken, dispatch))
     )
     .catch((err) => dispatch(createNewCateFailed()));
+};
+
+//====================================================================
+
+export const getAllPets = async (dispatch) => {
+  dispatch(getPetStart());
+  try {
+    const res = await axios.get("https://pet-shop-mini.herokuapp.com/api/pet");
+    dispatch(getPetSuccess(res.data));
+  } catch (err) {
+    dispatch(getPetFailed(err.response.data));
+  }
+};
+
+export const deletePet = async (id, dispatch) => {
+  dispatch(deletePetStart());
+  try {
+    const res = await axios.delete(
+      `https://pet-shop-mini.herokuapp.com/api/pet/${id}`
+    );
+    dispatch(deletePetSuccess(res.data));
+    getAllPets(dispatch);
+  } catch (error) {
+    console.log(error.response.data);
+    dispatch(deletePetFailed(error.response.data));
+  }
 };
