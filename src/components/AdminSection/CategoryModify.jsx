@@ -2,6 +2,8 @@ import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCategory } from '../../Redux/apiRequest'
+import CreateNewCategory from '../CreateNewCategory';
+import DeleteCategoryInfor from '../DeleteCategoryInfor';
 import UpdateCategoryInfor from '../UpdateCategoryInfor';
 
 const CategoryModify = () => {
@@ -29,7 +31,7 @@ const CategoryModify = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {cateList.map((row) => (
+                            {cateList?.map((row) => (
                                 <TableRow key={row.id}>
                                     <TableCell component="th" scope="row">
                                         {row.id}
@@ -37,6 +39,7 @@ const CategoryModify = () => {
                                     <TableCell align="center">{row.name}</TableCell>
                                     <TableCell align="center">
                                         <UpdateCategoryInfor cate={row}></UpdateCategoryInfor>
+                                        <DeleteCategoryInfor id={row.id}></DeleteCategoryInfor>
                                     </TableCell>
 
                                 </TableRow>
@@ -44,6 +47,9 @@ const CategoryModify = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+            </Paper>
+            <Paper sx={{ width: "10%", height: "50px", alignContent: "right" }}>
+                <CreateNewCategory></CreateNewCategory>
             </Paper>
         </Box>
 

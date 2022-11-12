@@ -11,6 +11,13 @@ import {
   logOutFailed,
 } from "./authSlice";
 import {
+  createNewCateFailed,
+  createNewCateStart,
+  createNewCateStartFailed,
+  createNewCateSuccess,
+  deleteCateFailed,
+  deleteCateStart,
+  deleteCateSuccess,
   getCateFailed,
   getCateStart,
   getCateSuccess,
@@ -148,4 +155,38 @@ export const updateCategory = async (dispatch, category) => {
   } catch (error) {
     dispatch(updateCateFailed(error.response.data));
   }
+};
+
+export const deleteCategory = async (id, accessToken, dispatch) => {
+  dispatch(deleteCateStart());
+  try {
+    const res = await axios.delete(
+      `https://pet-shop-mini.herokuapp.com/api/category/${id}`,
+      {
+        headers: { Authorization: "Bearer " + accessToken },
+      }
+    );
+    dispatch(deleteCateSuccess(res.data));
+    getAllCategory(accessToken, dispatch);
+  } catch (error) {
+    console.log(error.response.data);
+    dispatch(deleteCateFailed(error.response.data));
+  }
+};
+
+export const createCategory = (dispatch, category, accessToken) => {
+  dispatch(createNewCateStart());
+
+  axios
+    .post("https://pet-shop-mini.herokuapp.com/api/category", category, {
+      headers: {
+        Authorization: "Bearer " + accessToken,
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+    .then(() =>
+      dispatch(createNewCateSuccess(), getAllCategory(accessToken, dispatch))
+    )
+    .catch((err) => dispatch(createNewCateFailed()));
 };

@@ -33,6 +33,27 @@ const categorySlice = createSlice({
       state.category.isFetching = false;
       state.category.error = true;
     },
+    deleteCateStart: (state) => {
+      state.category.isFetching = true;
+    },
+    deleteCateSuccess: (state, action) => {
+      state.category.isFetching = false;
+    },
+    deleteCateFailed: (state, action) => {
+      state.category.isFetching = false;
+      state.category.error = true;
+    },
+    createNewCateStart: (state) => {
+      state.category.isFetching = true;
+    },
+    createNewCateSuccess: (state, action) => {
+      state.category.isFetching = false;
+      state.category.error = false;
+    },
+    createNewCateFailed: (state, action) => {
+      state.category.isFetching = false;
+      state.category.error = true;
+    },
   },
 });
 
@@ -43,5 +64,11 @@ export const {
   updateCateStart,
   updateCateSuccess,
   updateCateFailed,
+  deleteCateStart,
+  deleteCateSuccess,
+  deleteCateFailed,
+  createNewCateStart,
+  createNewCateSuccess,
+  createNewCateFailed,
 } = categorySlice.actions;
 export default categorySlice.reducer;
