@@ -25,12 +25,18 @@ import {
   updateCateSuccess,
 } from "./cateSlice";
 import {
+  createNewPetFailed,
+  createNewPetStart,
+  createNewPetSuccess,
   deletePetFailed,
   deletePetStart,
   deletePetSuccess,
   getPetFailed,
   getPetStart,
   getPetSuccess,
+  updatePetFailed,
+  updatePetStart,
+  updatePetSuccess,
 } from "./petSlice";
 import {
   deleteUserFailed,
@@ -225,4 +231,32 @@ export const deletePet = async (id, dispatch) => {
     console.log(error.response.data);
     dispatch(deletePetFailed(error.response.data));
   }
+};
+
+export const updatePet = async (dispatch, pet) => {
+  dispatch(updatePetStart());
+  try {
+    const res = await axios.patch(
+      `https://pet-shop-mini.herokuapp.com/api/pet/update`,
+      pet
+    );
+    dispatch(updatePetSuccess(res.data));
+    getAllPets(dispatch);
+  } catch (error) {
+    dispatch(updatePetFailed(error.response.data));
+  }
+};
+
+export const createpet = (dispatch, pet, accessToken) => {
+  dispatch(createNewPetStart());
+
+  axios
+    .post("https://pet-shop-mini.herokuapp.com/api/pet", pet, {
+      headers: {
+        Authorization: "Bearer " + accessToken,
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+    .then(() => dispatch(createNewPetSuccess(), getAllPets(dispatch)))
+    .catch((err) => dispatch(createNewPetFailed()));
 };

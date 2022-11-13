@@ -23,16 +23,16 @@ const petSlice = createSlice({
       state.pet.isFetching = false;
       state.pet.error = true;
     },
-    // updateCateStart: (state) => {
-    //   state.category.isFetching = true;
-    // },
-    // updateCateSuccess: (state, action) => {
-    //   state.category.isFetching = false;
-    // },
-    // updateCateFailed: (state) => {
-    //   state.category.isFetching = false;
-    //   state.category.error = true;
-    // },
+    updatePetStart: (state) => {
+      state.pet.isFetching = true;
+    },
+    updatePetSuccess: (state, action) => {
+      state.pet.isFetching = false;
+    },
+    updatePetFailed: (state) => {
+      state.pet.isFetching = false;
+      state.pet.error = true;
+    },
     deletePetStart: (state) => {
       state.pet.isFetching = true;
     },
@@ -43,17 +43,17 @@ const petSlice = createSlice({
       state.pet.isFetching = false;
       state.pet.error = true;
     },
-    // createNewCateStart: (state) => {
-    //   state.category.isFetching = true;
-    // },
-    // createNewCateSuccess: (state, action) => {
-    //   state.category.isFetching = false;
-    //   state.category.error = false;
-    // },
-    // createNewCateFailed: (state, action) => {
-    //   state.category.isFetching = false;
-    //   state.category.error = true;
-    // },
+    createNewPetStart: (state) => {
+      state.pet.isFetching = true;
+    },
+    createNewPetSuccess: (state, action) => {
+      state.pet.isFetching = false;
+      state.pet.error = false;
+    },
+    createNewPetFailed: (state, action) => {
+      state.pet.isFetching = false;
+      state.pet.error = true;
+    },
   },
 });
 
@@ -61,14 +61,14 @@ export const {
   getPetStart,
   getPetSuccess,
   getPetFailed,
-  //   updateCateStart,
-  //   updateCateSuccess,
-  //   updateCateFailed,
+  updatePetStart,
+  updatePetFailed,
+  updatePetSuccess,
   deletePetStart,
   deletePetSuccess,
   deletePetFailed,
-  //   createNewCateStart,
-  //   createNewCateSuccess,
-  //   createNewCateFailed,
+  createNewPetStart,
+  createNewPetSuccess,
+  createNewPetFailed,
 } = petSlice.actions;
 export default petSlice.reducer;

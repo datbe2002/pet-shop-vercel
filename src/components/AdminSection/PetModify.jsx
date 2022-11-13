@@ -6,6 +6,7 @@ import UpdatePetInfor from '../UpdatePetInfor';
 import DeletePetInfor from '../DeletePetInfor';
 import { useEffect } from 'react';
 import { getAllPets } from '../../Redux/apiRequest';
+import CreateNewPet from '../CreateNewPet';
 
 const PetModify = () => {
 
@@ -40,7 +41,7 @@ const PetModify = () => {
                                     <img
                                         style={{ width: "100px", height: "auto", textAlign: "center" }}
                                         src={row.img_url}
-                                        alt={row.title}
+                                        alt={row.name}
                                     ></img>
 
                                     <TableCell align="center">
@@ -70,7 +71,7 @@ const PetModify = () => {
                 </TableContainer>
             </Paper>
             <Paper sx={{ width: "10%", height: "50px", alignContent: "right" }}>
-                {/* <CreateNewCategory></CreateNewCategory> */}
+                <CreateNewPet></CreateNewPet>
             </Paper>
         </Box>
     )
