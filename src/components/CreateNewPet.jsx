@@ -20,7 +20,7 @@ const CreateNewPet = () => {
     const dispatch = useDispatch();
 
     const renderCategory = () => {
-        return petCateList.map((value) => {
+        return petCateList?.map((value) => {
             return <MenuItem value={value.id}>{value.name}</MenuItem>;
         });
     };

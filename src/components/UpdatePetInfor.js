@@ -56,7 +56,7 @@ const UpdatePetInfor = ({ pet }) => {
     }),
   });
   const renderCategory = () => {
-    return petCateList.map((value) => {
+    return petCateList?.map((value) => {
       return <MenuItem value={value.id}>{value.name}</MenuItem>;
     });
   };

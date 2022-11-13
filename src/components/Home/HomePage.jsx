@@ -28,7 +28,7 @@ const HomePage = () => {
                 spacing={{ xs: 2, md: 3 }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
             >
-                {petList.map((pet) => (
+                {petList?.map((pet) => (
                     <Grid item xs={2} sm={4} md={4} key={pet.id}>
                         <Card sx={{ maxWidth: 345 }}>
                             <CardActionArea>

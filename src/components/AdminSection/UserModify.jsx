@@ -18,23 +18,7 @@ const UserModify = () => {
     return (
         <Box p={2}>
             <Paper>
-                {/* <div className="home-container">
-                <div className="home-title">User List</div>
-                <div className="home-userlist">
-                    {userList.map((user) => {
-                        return (
-                            <div className="user-container">
-                                <div className="home-user">{user.email}</div>
-                                <div className="update-user" >
-                                    <UpdateUserInfor user={user}> </UpdateUserInfor>
-                                </div>
-                                <div className="delete-user" onClick={() => handleDelete(user.id)}> Delete </div>
-                            </div>
-                        );
-                    })}
-                </div>
 
-            </div> */}
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="caption table">
                         <caption>User list</caption>
@@ -51,7 +35,7 @@ const UserModify = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {userList.map((row) => (
+                            {userList?.map((row) => (
                                 <TableRow key={row.id}>
                                     <TableCell component="th" scope="row">{row.fullName}</TableCell>
                                     <TableCell align="center">
