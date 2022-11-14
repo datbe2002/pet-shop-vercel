@@ -2,7 +2,8 @@ import { Button, Card, CardActionArea, CardContent, CardMedia, Container, Grid, 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-
+import './searchpage.css'
+import { AiOutlineArrowRight } from "react-icons/ai";
 const SearchPage = () => {
 
 
@@ -27,17 +28,20 @@ const SearchPage = () => {
     return (
         <Container sx={{ mt: 5 }}>
 
-            <div className="search">
+            <div className="input">
                 <input
-                    placeholder="Search for movies..."
+                    className="input__box"
+                    placeholder="Search for pets..."
                     value={searchTerm}
                     onChange={handleSearch}
                 ></input>
 
-                <img
-                    alt="Search"
+                <button
+                    className="input__submit"
                     onClick={() => searchPets(searchTerm)}
-                ></img>
+                >
+                    <AiOutlineArrowRight></AiOutlineArrowRight>
+                </button>
             </div>
             <Grid
                 container
@@ -97,7 +101,7 @@ const SearchPage = () => {
                     </>
 
                 ) : (
-                    <div style={{ display: "flex", textAlign: "center" }}>No pet found</div>
+                    <div style={{ marginTop: "20px" }}>No pet found</div>
                 )}
             </Grid>
         </Container>
