@@ -2,7 +2,7 @@ import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, F
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAllPets } from '../../Redux/apiRequest';
+import { getAllCategory, getAllPets } from '../../Redux/apiRequest';
 
 const HomePage = () => {
 
@@ -14,6 +14,7 @@ const HomePage = () => {
 
     useEffect(() => {
         getAllPets(dispatch)
+        getAllCategory(dispatch)
     }, [dispatch])
 
 

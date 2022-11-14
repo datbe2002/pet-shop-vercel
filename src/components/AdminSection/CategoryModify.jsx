@@ -9,11 +9,11 @@ import UpdateCategoryInfor from '../UpdateCategoryInfor';
 const CategoryModify = () => {
     const dispatch = useDispatch()
 
-    const user = useSelector((state) => state.auth.login?.currentUser);
+    // const user = useSelector((state) => state.auth.login?.currentUser);
     const cateList = useSelector((state) => state.category.category?.allCates);
 
     useEffect(() => {
-        getAllCategory(user?.accessToken, dispatch)
+        getAllCategory(dispatch)
 
     }, [dispatch])
     return (

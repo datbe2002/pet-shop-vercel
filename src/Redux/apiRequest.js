@@ -181,7 +181,7 @@ export const deleteCategory = async (id, accessToken, dispatch) => {
       }
     );
     dispatch(deleteCateSuccess(res.data));
-    getAllCategory(accessToken, dispatch);
+    getAllCategory(dispatch);
   } catch (error) {
     console.log(error.response.data);
     dispatch(deleteCateFailed(error.response.data));
@@ -198,9 +198,7 @@ export const createCategory = (dispatch, category, accessToken) => {
         "Access-Control-Allow-Origin": "*",
       },
     })
-    .then(() =>
-      dispatch(createNewCateSuccess(), getAllCategory(accessToken, dispatch))
-    )
+    .then(() => dispatch(createNewCateSuccess(), getAllCategory(dispatch)))
     .catch((err) => dispatch(createNewCateFailed()));
 };
 
