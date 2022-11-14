@@ -1,7 +1,7 @@
 import { Button, Card, CardActionArea, CardContent, CardMedia, Container, Grid, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAllPets } from '../../Redux/apiRequest';
 
 const HomePage = () => {
@@ -11,9 +11,11 @@ const HomePage = () => {
 
     const dispatch = useDispatch()
 
+    const nav = useNavigate()
     useEffect(() => {
         getAllPets(dispatch)
     }, [dispatch])
+
 
     return (
         <Container sx={{ mt: 5 }}>
@@ -30,13 +32,20 @@ const HomePage = () => {
             >
                 {petList?.map((pet) => (
                     <Grid item xs={2} sm={4} md={4} key={pet.id}>
-                        <Card sx={{ maxWidth: 345 }}>
+                        <Card sx={{ maxWidth: 345, minHeight: 400 }}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
-                                    height="auto:(("
-                                    image={pet.img_url}
-                                    alt={pet.name}
+                                    // height="auto:(("
+                                    // image={pet.img_url}
+
+                                    sx={{
+                                        backgroundImage: `url(${pet.img_url})`,
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundSize: "cover",
+                                        width: "345px",
+                                        height: "18rem",
+                                    }}
                                 />
                                 <CardContent sx={{ textAlign: "center" }}>
                                     <Typography gutterBottom variant="h6" component="div">
@@ -55,6 +64,7 @@ const HomePage = () => {
                                             style={{
                                                 color: "white",
                                                 fontWeight: "bold",
+                                                backgroundColor: "none",
                                                 textDecoration: "none",
                                             }}
                                         >

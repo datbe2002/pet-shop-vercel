@@ -8,12 +8,17 @@ import Dashboard from "../AdminSection/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import HomePage from "../Home/HomePage";
 import PetDetailPage from "../Home/PetDetailPage";
+import SearchPage from "../Home/SearchPage";
 
 export default function Router() {
   const element = useRoutes([
     {
       path: "/",
       element: <HomePage />,
+    },
+    {
+      path: "/home",
+      element: <SearchPage />,
     },
     {
       path: "/login",

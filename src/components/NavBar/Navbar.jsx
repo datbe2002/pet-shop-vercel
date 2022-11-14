@@ -13,11 +13,12 @@ const NavBar = () => {
     }
     return (
         <nav className="navbar-container">
+            <Link to="/home" className="navbar-home"> Home</Link>
+            <Link to="/" className="navbar-home"> Pet</Link>
 
 
             {user?.user.role === "Admin" ? (
                 <>
-                    <Link to="/" className="navbar-home"> Home</Link>
                     <Link to="/dashboard" className="navbar-logout"> Dashboard</Link>
                     <img className="navbar-avatar" style={{ borderRadius: "100px", height: "50px", width: "50px" }} src={user?.user.avatar} alt="Avatar" />
                     <p className="navbar-user">Hello <span> {user?.user.fullName}  </span> </p>
@@ -26,14 +27,12 @@ const NavBar = () => {
             ) : (
 
                 user?.user.role === "User" ? (<>
-                    <Link to="/" className="navbar-logout"> Home</Link>
 
                     <img className="navbar-avatar" style={{ borderRadius: "100px", height: "50px", width: "50px" }} src={user?.user.avatar} alt="Avatar" />
                     <p className="navbar-user">Hello <span> {user?.user.fullName}  </span> </p>
                     <Link to="/login" className="navbar-logout" onClick={handleLogout}> Log out</Link>
 
                 </>) : (<>
-                    <Link to="/" className="navbar-logout"> Home</Link>
                     <Link to="/login" className="navbar-logout"> Login</Link>
                     <Link to="/register" className="navbar-logout"> Register</Link>
                 </>

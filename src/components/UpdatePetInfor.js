@@ -29,7 +29,7 @@ const UpdatePetInfor = ({ pet }) => {
   const formik = useFormik({
     initialValues: {
       id: pet.id,
-      image: pet.img_url,
+      img_url: pet.img_url,
       name: pet.name,
       price: pet.price,
       description: pet.description,
@@ -48,7 +48,7 @@ const UpdatePetInfor = ({ pet }) => {
       name: Yup.string()
         .required("Required.")
         .min(2, "Must be 2 characters or more"),
-      image: Yup.string().required("Required.").min(2),
+      img_url: Yup.string().required("Required.").min(2),
       price: Yup.number().required("Required.").min(2),
       description: Yup.string().required("Required."),
       status: Yup.string().required("Required."),
@@ -101,11 +101,11 @@ const UpdatePetInfor = ({ pet }) => {
                 label="Image"
                 placeholder="Type new image url"
                 variant="outlined"
-                name="image"
-                value={formik.values.image}
+                name="img_url"
+                value={formik.values.img_url}
                 onChange={formik.handleChange}
-                error={formik.touched.image && Boolean(formik.errors.image)}
-                helperText={formik.touched.image && formik.errors.image}
+                error={formik.touched.img_url && Boolean(formik.errors.img_url)}
+                helperText={formik.touched.img_url && formik.errors.img_url}
               ></TextField>
               <TextField
                 fullWidth
