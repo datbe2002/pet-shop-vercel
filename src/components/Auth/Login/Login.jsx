@@ -4,6 +4,7 @@ import { loginUser } from "../../../Redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux"
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import Account from "./Account";
 
 const Login = () => {
 
@@ -46,6 +47,9 @@ const Login = () => {
 
     return (
         <section className="login-container">
+            <div>
+                <Account></Account>
+            </div>
             <form onSubmit={formik.handleSubmit}>
                 <div className="login-title">MEGAPET</div>
                 <input type="text" placeholder="Enter your email" name="email" value={formik.values.email} onChange={formik.handleChange} />
