@@ -145,14 +145,11 @@ export const updateUser = async (dispatch, user) => {
 
 //=================================================================
 
-export const getAllCategory = async (accessToken, dispatch) => {
+export const getAllCategory = async (dispatch) => {
   dispatch(getCateStart());
   try {
     const res = await axios.get(
-      "https://pet-shop-mini.herokuapp.com/api/category",
-      {
-        headers: { Authorization: "Bearer " + accessToken },
-      }
+      "https://pet-shop-mini.herokuapp.com/api/category"
     );
     dispatch(getCateSuccess(res.data));
   } catch (err) {
