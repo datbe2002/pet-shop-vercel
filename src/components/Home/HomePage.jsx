@@ -55,7 +55,7 @@ const HomePage = () => {
             >
 
 
-                {petList.filter(p => p.cate_name === cate)?.map((pet) => (
+                {petList?.filter(p => p.cate_name === cate)?.map((pet) => (
                     <Grid item xs={2} sm={4} md={4} key={pet.id}>
                         <Card sx={{ maxWidth: 345, minHeight: 400 }}>
                             <CardActionArea>
