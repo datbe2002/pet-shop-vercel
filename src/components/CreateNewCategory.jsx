@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from "yup";
 import AddIcon from '@mui/icons-material/Add';
 import { createCategory } from '../Redux/apiRequest';
-import { useNavigate } from 'react-router-dom';
 const CreateNewCategory = () => {
 
     const user = useSelector((state) => state.auth.login?.currentUser);
@@ -17,8 +16,6 @@ const CreateNewCategory = () => {
     const handleClose = () => setOpen(false);
 
     const dispatch = useDispatch();
-
-    const nav = useNavigate()
 
     const formik = useFormik({
         initialValues: {

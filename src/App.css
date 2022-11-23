@@ -5,25 +5,23 @@
   padding: 0;
   margin: 0;
 }
+
 .App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  /* background-image: url("https://media.istockphoto.com/vectors/pet-shop-sign-template-with-many-pets-vector-id877227086?k=20&m=877227086&s=170667a&w=0&h=PURPEF-jsVgbcnm59yx5pZHfUyh0frN_AOG6iP5gRWg=");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover; */
-  /* background-color: #edcb01; */
-  background: linear-gradient(to bottom, #99ccff 0%, #3333ff 100%);
-}
-body,
-.App {
-  min-height: 100vh;
+  min-height: 86vh;
+  /* min-width: 1000px; */
   margin: 0;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   font-size: 1.15rem;
-  font-family: "Inter", sans-serif;
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 15px;
+  margin-top: 20px;
 }

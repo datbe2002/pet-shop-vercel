@@ -1,17 +1,18 @@
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../../Redux/apiRequest";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useFormik } from "formik";
 import * as Yup from 'yup';
-import Account from "./Account";
+// import Account from "./Account";
+// import { Divider } from "@mui/material";
+import avatarImage from "../../../assets/petstoreavatar.png"
+
 
 const Login = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const [loginError, setLoginError] = useState("");
-    const msg = useSelector((state) => state.auth?.msg)
 
     const formik = useFormik({
         initialValues: {
@@ -29,40 +30,45 @@ const Login = () => {
     });
 
 
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-
-
-
-    // const handleLogin = (e) => {
-    //     e.preventDefault();
-    //     const newUser = {
-    //         email: email,
-    //         password: password,
-    //     };
-
-
-    // loginUser(newUser, dispatch, navigate);
-
-
     return (
-        <section className="login-container">
-            <div>
-                <Account></Account>
-            </div>
-            <form onSubmit={formik.handleSubmit}>
-                <div className="login-title">MEGAPET</div>
-                <input type="text" placeholder="Enter your email" name="email" value={formik.values.email} onChange={formik.handleChange} />
-                {formik.touched.email && <div style={{ color: "red" }}>{formik.errors.email}</div>}
-                <input type="password" placeholder="Enter your password" name="password" value={formik.values.password} onChange={formik.handleChange} />
-                {formik.touched.password && <div style={{ color: "red" }}>{formik.errors.password}</div>}
-                <div style={{ color: "red" }}>{msg.message}</div>
-                <button type="submit"> Log in </button>
-            </form>
-            <div className="line"></div>
-            <div className="login-register"> Don't have an account yet? </div>
-            <Link className="login-register-link" to="/register">Create New Account</Link>
-        </section>
+        <div className="full-container">
+            <section className="left-container">
+                <div className="content">
+                    <h2>MEGAPET&#174;</h2>
+                    <p>Where you can find a lovely pet for your homee</p>
+                </div>
+            </section>
+            <section className="right-container">
+                <div className="login-container">
+                    <img className="logo-image" src={avatarImage} alt="LOGO"></img>
+
+                    <form className="login-form"
+                        onSubmit={formik.handleSubmit}>
+                        <lable>Email</lable>
+                        <input
+                            className="login-email_input"
+                            type="text" placeholder="Enter your email" name="email" value={formik.values.email} onChange={formik.handleChange} />
+                        {formik.touched.email && <div style={{ color: "red" }}>{formik.errors.email}</div>}
+                        <lable>Password</lable>
+
+                        <input
+
+                            className="login-password_input"
+                            type="password" placeholder="Enter your password" name="password" value={formik.values.password} onChange={formik.handleChange} />
+                        {formik.touched.password && <div style={{ color: "red" }}>{formik.errors.password}</div>}
+                        <button
+                            className="login-btn"
+                            type="submit"> Log in </button>
+                    </form>
+
+                    <div className="line"></div>
+                    <div className="login-register"> Don't have an account yet? </div>
+                    <Link className="login-register-link" to="/register">Create New Account</Link>
+                </div>
+
+            </section>
+        </div>
+
     );
 }
 

@@ -11,7 +11,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { updateCategory } from "../Redux/apiRequest";
-import cateSlice from "../Redux/cateSlice";
 
 const UpdateCategoryInfor = ({ cate }) => {
   const [open, setOpen] = React.useState(false);

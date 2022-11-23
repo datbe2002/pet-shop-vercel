@@ -39,7 +39,7 @@ const UserModify = () => {
                                 <TableRow key={row.id}>
                                     <TableCell component="th" scope="row">{row.fullName}</TableCell>
                                     <TableCell align="center">
-                                        <img style={{ borderRadius: "50px", width: "2.5rem" }} src={row.avatar}></img>
+                                        <img style={{ borderRadius: "50px", width: "2.5rem" }} src={row.avatar} alt={row.fullName}></img>
                                     </TableCell>
 
                                     <TableCell align="center">{row.email}</TableCell>

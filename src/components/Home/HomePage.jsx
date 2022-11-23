@@ -1,8 +1,9 @@
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getAllCategory, getAllPets } from '../../Redux/apiRequest';
+import { AddToCart } from '../../Redux/cartSlice';
 
 const HomePage = () => {
 
@@ -16,7 +17,6 @@ const HomePage = () => {
         getAllPets(dispatch)
         getAllCategory(dispatch)
     }, [dispatch])
-
 
     const renderCategory = () => {
         return petCateList?.map((value) => {
@@ -104,6 +104,7 @@ const HomePage = () => {
                         </Card>
                     </Grid>
                 ))}
+
             </Grid>
         </Container>
     )
@@ -111,37 +112,3 @@ const HomePage = () => {
 
 export default HomePage
 
-
-// import * as React from 'react';
-// import Box from '@mui/material/Box';
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import FormControl from '@mui/material/FormControl';
-// import Select from '@mui/material/Select';
-
-// export default function BasicSelect() {
-//   const [age, setAge] = React.useState('');
-
-//   const handleChange = (event) => {
-//     setAge(event.target.value);
-//   };
-
-//   return (
-//     <Box sx={{ minWidth: 120 }}>
-//       <FormControl fullWidth>
-//         <InputLabel id="demo-simple-select-label">Age</InputLabel>
-//         <Select
-//           labelId="demo-simple-select-label"
-//           id="demo-simple-select"
-//           value={age}
-//           label="Age"
-//           onChange={handleChange}
-//         >
-//           <MenuItem value={10}>Ten</MenuItem>
-//           <MenuItem value={20}>Twenty</MenuItem>
-//           <MenuItem value={30}>Thirty</MenuItem>
-//         </Select>
-//       </FormControl>
-//     </Box>
-//   );
-// }

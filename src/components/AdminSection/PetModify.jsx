@@ -15,7 +15,7 @@ const PetModify = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         getAllPets(dispatch)
-    }, [])
+    }, [dispatch])
 
     return (
         <Box p={2}>

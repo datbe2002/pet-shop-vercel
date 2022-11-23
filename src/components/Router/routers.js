@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import HomePage from "../Home/HomePage";
 import PetDetailPage from "../Home/PetDetailPage";
 import SearchPage from "../Home/SearchPage";
+import PetCart from "../Cart/PetCart";
 
 export default function Router() {
   const element = useRoutes([
@@ -27,6 +28,10 @@ export default function Router() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/cart",
+      element: <PetCart />,
     },
     {
       path: "/pet-detail/:id",

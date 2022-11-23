@@ -6,11 +6,14 @@ import { Provider } from "react-redux";
 import { store, persistor } from "../src/Redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
+      <ToastContainer></ToastContainer>
       <PersistGate loading={null} persistor={persistor}>
         <App />
       </PersistGate>

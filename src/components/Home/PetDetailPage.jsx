@@ -1,12 +1,16 @@
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, Divider, dividerClasses, Grid, Paper, Typography } from '@mui/material';
+import { Box, Button, Container, Divider, Grid, Paper, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { addToCart } from '../../Redux/cartSlice';
 
 export default function PetDetailPage() {
 
     const [petList, setPetList] = useState([]);
-    const petID = useParams()
+    const petID = useParams();
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.login?.currentUser);
 
     // console.log(petID)
     useEffect(() => {
@@ -20,9 +24,14 @@ export default function PetDetailPage() {
         }
         fetchBooks()
 
-    }, [])
+    }, [petID.id])
 
     console.log(petList)
+
+    const handleAddCart = (petList) => {
+        dispatch(addToCart(petList))
+
+    }
 
     return (
         <Container>
@@ -42,9 +51,33 @@ export default function PetDetailPage() {
                                         <Divider sx={{ mt: 5, mb: 3 }}></Divider>
                                         <Typography sx={{ textAlign: "center", mt: 2, mb: 2 }}> Description for {petList.cate_name}</Typography>
                                         <Typography> {petList.description}</Typography>
+                                        <Divider sx={{ mt: 5, mb: 3 }}></Divider>
+
+
+                                        {user ? (
+                                            <Button sx={{
+                                                color: "white", backgroundColor: "black",
+                                                transition: "0.4s"
+
+                                                , "&:hover": {
+                                                    transform: "translate(0, -5px)",
+                                                    backgroundColor: "#696969 "
+                                                },
+                                            }} onClick={() => handleAddCart(petList)}> Place order now</Button>
+                                        ) : (
+                                            <Button sx={{
+                                                color: "white", backgroundColor: "black",
+                                                transition: "0.4s"
+
+                                                , "&:hover": {
+                                                    transform: "translate(0, -5px)",
+                                                    backgroundColor: "#696969 "
+                                                },
+                                            }} onClick={() => alert("You have to login to place this")}> Place order now</Button>
+                                        )}
+
 
                                     </Box>
-
                                 </Paper>
                             </Grid>
                         </Grid>

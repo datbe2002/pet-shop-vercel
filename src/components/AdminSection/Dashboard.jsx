@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { deleteUser, getAllCategory, getAllUsers } from '../../Redux/apiRequest';
+import { getAllUsers } from '../../Redux/apiRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper } from '@mui/material'
@@ -21,8 +21,7 @@ export default function Dashboard() {
     const user = useSelector((state) => state.auth.login?.currentUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const userList = useSelector((state) => state.users.users?.allUsers);
-    const msg = useSelector((state) => state.users?.msg);
+
 
     const [choice, setChoice] = useState("User")
 
@@ -35,7 +34,7 @@ export default function Dashboard() {
         if (user?.accessToken) {
             getAllUsers(user?.accessToken, dispatch)
         }
-    }, [dispatch]);
+    }, [dispatch, navigate, user]);
 
 
     console.log(choice)

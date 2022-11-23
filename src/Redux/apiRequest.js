@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
   loginStart,
   loginFailed,
@@ -61,28 +62,43 @@ export const loginUser = async (user, dispatch, navigate) => {
     );
     console.log(user);
     dispatch(loginSuccess(res.data));
-
+    toast.success("Login successfully", {
+      position: "top-right",
+    });
     if (res.data.user?.role === "Admin") {
       navigate("/dashboard");
     } else {
       navigate("/");
     }
   } catch (err) {
-    dispatch(loginFailed(err.response.data));
+    dispatch(loginFailed());
+    toast.error(err.response.data.message, {
+      position: "top-right",
+    });
   }
 };
 
-export const registerUser = (user, dispatch, navigate) => {
+export const registerUser = async (user, dispatch, navigate) => {
   dispatch(registerStart());
 
-  axios
-    .post("https://pet-shop-mini.herokuapp.com/api/register", user)
-    .then(
-      () => dispatch(registerSuccess()),
+  try {
+    const res = await axios.post(
+      "https://pet-shop-mini.herokuapp.com/api/register",
+      user
+    );
+    console.log(user);
+    dispatch(registerSuccess(res.data));
+    toast.success("Register successfully", {
+      position: "top-right",
+    });
 
-      navigate("/login")
-    )
-    .catch((err) => dispatch(registerFailed()));
+    navigate("/login");
+  } catch (err) {
+    dispatch(registerFailed());
+    toast.error(err.response.data.message, {
+      position: "top-right",
+    });
+  }
 };
 
 export const getAllUsers = async (accessToken, dispatch) => {
@@ -112,10 +128,16 @@ export const deleteUser = async (id, accessToken, dispatch) => {
       }
     );
     dispatch(deleteUserSuccess(res.data));
+    toast.success("Delete this user successfully", {
+      position: "top-right",
+    });
     getAllUsers(accessToken, dispatch);
   } catch (error) {
     console.log(error.response.data);
     dispatch(deleteUserFailed(error.response.data));
+    toast.error(error.response.data.message, {
+      position: "top-right",
+    });
   }
 };
 
@@ -124,6 +146,9 @@ export const logOut = async (navigate, dispatch) => {
   try {
     dispatch(logOutSuccess());
     navigate("/login");
+    toast.success("Logout successfully", {
+      position: "top-right",
+    });
   } catch (error) {
     dispatch(logOutFailed());
   }
@@ -137,9 +162,15 @@ export const updateUser = async (dispatch, user) => {
       user
     );
     dispatch(updateUserSuccess(res.data));
+    toast.success("Update this user successfully", {
+      position: "top-right",
+    });
     // getAllUsers(process.env.TOKEN, dispatch);
   } catch (error) {
     dispatch(updateUserFailed(error.response.data));
+    toast.error(error.response.data.message, {
+      position: "top-right",
+    });
   }
 };
 
@@ -154,6 +185,9 @@ export const getAllCategory = async (dispatch) => {
     dispatch(getCateSuccess(res.data));
   } catch (err) {
     dispatch(getCateFailed(err.response.data));
+    toast.error(err.response.data.message, {
+      position: "top-right",
+    });
   }
 };
 
@@ -165,9 +199,15 @@ export const updateCategory = async (dispatch, category) => {
       category
     );
     dispatch(updateCateSuccess(res.data));
-    // getAllCategory(process.env.TOKEN, dispatch);
+    toast.success("Update category success", {
+      position: "top-right",
+    });
+    getAllCategory(dispatch);
   } catch (error) {
     dispatch(updateCateFailed(error.response.data));
+    toast.error(error.response.data.message, {
+      position: "top-right",
+    });
   }
 };
 
@@ -181,10 +221,16 @@ export const deleteCategory = async (id, accessToken, dispatch) => {
       }
     );
     dispatch(deleteCateSuccess(res.data));
+    toast.success("Delete category success", {
+      position: "top-right",
+    });
     getAllCategory(dispatch);
   } catch (error) {
     console.log(error.response.data);
     dispatch(deleteCateFailed(error.response.data));
+    toast.error(error.response.data.message, {
+      position: "top-right",
+    });
   }
 };
 
@@ -198,7 +244,15 @@ export const createCategory = (dispatch, category, accessToken) => {
         "Access-Control-Allow-Origin": "*",
       },
     })
-    .then(() => dispatch(createNewCateSuccess(), getAllCategory(dispatch)))
+    .then(() =>
+      dispatch(
+        createNewCateSuccess(),
+        toast.success("Create new category successfully", {
+          position: "top-right",
+        }),
+        getAllCategory(dispatch)
+      )
+    )
     .catch((err) => dispatch(createNewCateFailed()));
 };
 
@@ -221,10 +275,16 @@ export const deletePet = async (id, dispatch) => {
       `https://pet-shop-mini.herokuapp.com/api/pet/${id}`
     );
     dispatch(deletePetSuccess(res.data));
+    toast.success("Delete pet successfully", {
+      position: "top-right",
+    });
     getAllPets(dispatch);
   } catch (error) {
     console.log(error.response.data);
     dispatch(deletePetFailed(error.response.data));
+    toast.error(error.response.data.message, {
+      position: "top-right",
+    });
   }
 };
 

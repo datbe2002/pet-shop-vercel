@@ -3,6 +3,7 @@ import authReducer from "./authSlice";
 import userReducer from "./userSlice";
 import categoryReducer from "./cateSlice";
 import petReducer from "./petSlice";
+import cartReducer from "./cartSlice";
 import {
   persistStore,
   persistReducer,
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   users: userReducer,
   category: categoryReducer,
   pet: petReducer,
+  carts: cartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

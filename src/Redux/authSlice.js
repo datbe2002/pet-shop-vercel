@@ -4,7 +4,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     login: {
-      currentUser: null,
+      currentUser: [],
       isFetching: false,
       error: false,
     },
@@ -54,6 +54,7 @@ const authSlice = createSlice({
     logOutSuccess: (state) => {
       state.login.isFetching = false;
       state.login.currentUser = null;
+      state.cartItems = null;
       state.login.error = false;
     },
     logOutFailed: (state) => {
