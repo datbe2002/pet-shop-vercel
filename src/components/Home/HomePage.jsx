@@ -11,8 +11,8 @@ const HomePage = () => {
     const petList = useSelector((state) => state.pet.pet?.allPets);
     const petCateList = useSelector((state) => state.category.category?.allCates);
     const [cate, setCate] = React.useState('');
+    const [isRenpet, setIsRenpet] = React.useState('')
     const dispatch = useDispatch()
-
     useEffect(() => {
         getAllPets(dispatch)
         getAllCategory(dispatch)
@@ -24,7 +24,112 @@ const HomePage = () => {
         });
     };
 
+    const renderPet = () => {
+        if (isRenpet === "") {
+            return petList?.map((pet) => (
+                <Grid item xs={2} sm={4} md={4} key={pet.id}>
+                    <Card sx={{ maxWidth: 345, minHeight: 400 }}>
+                        <CardActionArea>
+                            <CardMedia
+                                component="img"
+                                // height="auto:(("
+                                // image={pet.img_url}
+
+                                sx={{
+                                    backgroundImage: `url(${pet.img_url})`,
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundSize: "cover",
+                                    width: "345px",
+                                    height: "18rem",
+                                }}
+                            />
+                            <CardContent sx={{ textAlign: "center" }}>
+                                <Typography gutterBottom variant="h6" component="div">
+                                    {pet.name}
+                                </Typography>
+                                <Button
+                                    sx={{
+                                        backgroundColor: "#36454F",
+                                        "&:hover": {
+                                            color: "white",
+                                            backgroundColor: "#343434",
+                                        },
+                                    }}>
+                                    <Link
+                                        to={`/pet-detail/${pet.id}`}
+                                        style={{
+                                            color: "white",
+                                            fontWeight: "bold",
+                                            backgroundColor: "none",
+                                            textDecoration: "none",
+                                        }}
+                                    >
+                                        Read more
+                                    </Link>
+                                </Button>
+
+
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            ))
+
+        } else {
+            return petList?.filter(p => p.cate_name === cate)?.map((pet) => (
+                <Grid item xs={2} sm={4} md={4} key={pet.id}>
+                    <Card sx={{ maxWidth: 345, minHeight: 400 }}>
+                        <CardActionArea>
+                            <CardMedia
+                                component="img"
+                                // height="auto:(("
+                                // image={pet.img_url}
+
+                                sx={{
+                                    backgroundImage: `url(${pet.img_url})`,
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundSize: "cover",
+                                    width: "345px",
+                                    height: "18rem",
+                                }}
+                            />
+                            <CardContent sx={{ textAlign: "center" }}>
+                                <Typography gutterBottom variant="h6" component="div">
+                                    {pet.name}
+                                </Typography>
+                                <Button
+                                    sx={{
+                                        backgroundColor: "#36454F",
+                                        "&:hover": {
+                                            color: "white",
+                                            backgroundColor: "#343434",
+                                        },
+                                    }}>
+                                    <Link
+                                        to={`/pet-detail/${pet.id}`}
+                                        style={{
+                                            color: "white",
+                                            fontWeight: "bold",
+                                            backgroundColor: "none",
+                                            textDecoration: "none",
+                                        }}
+                                    >
+                                        Read more
+                                    </Link>
+                                </Button>
+
+
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            ))
+        }
+    }
+
     const handleChange = (event) => {
+        setIsRenpet("cate")
+
         setCate(event.target.value);
     };
     return (
@@ -39,7 +144,7 @@ const HomePage = () => {
                         label="Category"
                         onChange={handleChange}
                     >
-                        {renderCategory()}
+                        {renderCategory(isRenpet)}
                     </Select>
                 </FormControl>
             </Box>
@@ -56,54 +161,7 @@ const HomePage = () => {
             >
 
 
-                {petList?.filter(p => p.cate_name === cate)?.map((pet) => (
-                    <Grid item xs={2} sm={4} md={4} key={pet.id}>
-                        <Card sx={{ maxWidth: 345, minHeight: 400 }}>
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    // height="auto:(("
-                                    // image={pet.img_url}
-
-                                    sx={{
-                                        backgroundImage: `url(${pet.img_url})`,
-                                        backgroundRepeat: "no-repeat",
-                                        backgroundSize: "cover",
-                                        width: "345px",
-                                        height: "18rem",
-                                    }}
-                                />
-                                <CardContent sx={{ textAlign: "center" }}>
-                                    <Typography gutterBottom variant="h6" component="div">
-                                        {pet.name}
-                                    </Typography>
-                                    <Button
-                                        sx={{
-                                            backgroundColor: "#36454F",
-                                            "&:hover": {
-                                                color: "white",
-                                                backgroundColor: "#343434",
-                                            },
-                                        }}>
-                                        <Link
-                                            to={`/pet-detail/${pet.id}`}
-                                            style={{
-                                                color: "white",
-                                                fontWeight: "bold",
-                                                backgroundColor: "none",
-                                                textDecoration: "none",
-                                            }}
-                                        >
-                                            Read more
-                                        </Link>
-                                    </Button>
-
-
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                    </Grid>
-                ))}
+                {renderPet()}
 
             </Grid>
         </Container>

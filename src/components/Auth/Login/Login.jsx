@@ -44,12 +44,12 @@ const Login = () => {
 
                     <form className="login-form"
                         onSubmit={formik.handleSubmit}>
-                        <lable>Email</lable>
+                        <label>Email</label>
                         <input
                             className="login-email_input"
                             type="text" placeholder="Enter your email" name="email" value={formik.values.email} onChange={formik.handleChange} />
                         {formik.touched.email && <div style={{ color: "red" }}>{formik.errors.email}</div>}
-                        <lable>Password</lable>
+                        <label>Password</label>
 
                         <input
 
