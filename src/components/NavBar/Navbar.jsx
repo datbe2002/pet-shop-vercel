@@ -47,7 +47,7 @@ const NavBar = () => {
             <NavLink style={navStyle} to="/" className="navbar-pet" end>Pet</NavLink>
 
 
-            {user?.user.role === "Admin" ? (
+            {user?.user?.role === "Admin" ? (
                 <>
                     <NavLink style={navStyle} to="/dashboard" className="navbar-dashboard"> Dashboard</NavLink>
                     <Button sx={{ width: "1.1rem" }}
@@ -81,7 +81,7 @@ const NavBar = () => {
                 </>
             ) : (
 
-                user?.user.role === "User" ? (<>
+                user?.user?.role === "User" ? (<>
                     <NavLink style={navStyle} to="/cart" className="navbar-cart"><ShoppingCartIcon /><span className="quantity-cart">{cartTotalQuantity}</span></NavLink>
 
                     <Button sx={{ width: "1.1rem" }}
