@@ -36,9 +36,15 @@ const NavBar = () => {
 
     const navStyle = ({ isActive }) => {
         return {
-            backgroundColor: isActive ? 'white' : 'black',
-            color: isActive ? 'black' : 'white',
+            color: 'white',
+            borderBottom: isActive ? '2px solid white' : 'none',
+            borderRadius: 'none'
         }
+    }
+
+    const handleNavProfile = () => {
+        navigate("/profile")
+        handleClose()
     }
 
     return (
@@ -69,8 +75,7 @@ const NavBar = () => {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}></MenuItem>
+
                         <MenuItem onClick={handleClose}>
                             <NavLink style={{
                                 textDecoration: 'none',
@@ -103,8 +108,8 @@ const NavBar = () => {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}></MenuItem>
+                        <MenuItem onClick={handleNavProfile}>Profile</MenuItem>
+
                         <MenuItem onClick={handleClose}>
                             <NavLink style={{
                                 textDecoration: 'none',

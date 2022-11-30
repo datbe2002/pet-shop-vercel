@@ -1,9 +1,9 @@
-import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material'
+import { alertClasses, Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getAllCategory, getAllPets } from '../../Redux/apiRequest';
-import { AddToCart } from '../../Redux/cartSlice';
+import { addToCart } from '../../Redux/cartSlice';
 
 const HomePage = () => {
 
@@ -12,6 +12,8 @@ const HomePage = () => {
     const petCateList = useSelector((state) => state.category.category?.allCates);
     const [cate, setCate] = React.useState('');
     const [isRenpet, setIsRenpet] = React.useState('')
+    const user = useSelector((state) => state.auth.login?.currentUser);
+
     const dispatch = useDispatch()
     useEffect(() => {
         getAllPets(dispatch)
@@ -23,6 +25,11 @@ const HomePage = () => {
             return <MenuItem value={value.name}>{value.name}</MenuItem>;
         });
     };
+
+    const handleAddToCart = (pet) => {
+        dispatch(addToCart(pet))
+    }
+
 
     const renderPet = () => {
         if (isRenpet === "") {
@@ -49,24 +56,60 @@ const HomePage = () => {
                                 </Typography>
                                 <Button
                                     sx={{
-                                        backgroundColor: "#36454F",
+                                        border: "1px solid black",
+                                        marginRight: "2rem",
+                                        transition: "0.5s",
+
                                         "&:hover": {
-                                            color: "white",
-                                            backgroundColor: "#343434",
+                                            transform: "translate(0, -5px)"
                                         },
                                     }}>
                                     <Link
                                         to={`/pet-detail/${pet.id}`}
                                         style={{
-                                            color: "white",
+                                            color: "black",
                                             fontWeight: "bold",
-                                            backgroundColor: "none",
                                             textDecoration: "none",
                                         }}
                                     >
-                                        Read more
+                                        View more
                                     </Link>
                                 </Button>
+
+                                {user ? (
+                                    <Button
+                                        sx={{
+                                            backgroundColor: "black",
+                                            color: "white",
+                                            fontWeight: "bold",
+                                            textDecoration: "none",
+                                            transition: "0.5s",
+                                            "&:hover": {
+                                                color: "white",
+                                                backgroundColor: "#343434",
+                                                transform: "translate(0, -5px)"
+                                            },
+                                        }} onClick={() => handleAddToCart(pet)}>
+                                        Add to cart
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        sx={{
+                                            backgroundColor: "black",
+                                            color: "white",
+                                            fontWeight: "bold",
+                                            textDecoration: "none",
+                                            transition: "0.5s",
+                                            "&:hover": {
+                                                color: "white",
+                                                backgroundColor: "#343434",
+                                                transform: "translate(0, -5px)"
+                                            },
+                                        }} onClick={() => alert("Please login to buy")}>
+                                        Add to cart
+                                    </Button>
+                                )}
+
 
 
                             </CardContent>
@@ -99,25 +142,58 @@ const HomePage = () => {
                                 </Typography>
                                 <Button
                                     sx={{
-                                        backgroundColor: "#36454F",
+                                        border: "1px solid black",
+                                        marginRight: "2rem",
+                                        transition: "0.5s",
+
                                         "&:hover": {
-                                            color: "white",
-                                            backgroundColor: "#343434",
+                                            transform: "translate(0, -5px)"
                                         },
                                     }}>
                                     <Link
                                         to={`/pet-detail/${pet.id}`}
                                         style={{
-                                            color: "white",
+                                            color: "black",
                                             fontWeight: "bold",
-                                            backgroundColor: "none",
                                             textDecoration: "none",
                                         }}
                                     >
-                                        Read more
+                                        View more
                                     </Link>
                                 </Button>
-
+                                {user ? (
+                                    <Button
+                                        sx={{
+                                            backgroundColor: "black",
+                                            color: "white",
+                                            fontWeight: "bold",
+                                            textDecoration: "none",
+                                            transition: "0.5s",
+                                            "&:hover": {
+                                                color: "white",
+                                                backgroundColor: "#343434",
+                                                transform: "translate(0, -5px)"
+                                            },
+                                        }} onClick={() => handleAddToCart(pet)}>
+                                        Add to cart
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        sx={{
+                                            backgroundColor: "black",
+                                            color: "white",
+                                            fontWeight: "bold",
+                                            textDecoration: "none",
+                                            transition: "0.5s",
+                                            "&:hover": {
+                                                color: "white",
+                                                backgroundColor: "#343434",
+                                                transform: "translate(0, -5px)"
+                                            },
+                                        }} onClick={() => alert("Please login to buy")}>
+                                        Add to cart
+                                    </Button>
+                                )}
 
                             </CardContent>
                         </CardActionArea>

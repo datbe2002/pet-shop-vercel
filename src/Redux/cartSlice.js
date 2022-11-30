@@ -14,9 +14,21 @@ const cartSlice = createSlice({
       const itemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
+
       if (itemIndex >= 0) {
-        state.cartItems[itemIndex].cartQuantity += 1;
-        toast.info("Increase pet quantity", {
+        if (
+          state.cartItems[itemIndex].cartQuantity ===
+          state.cartItems[itemIndex].quantity_stock
+        ) {
+          state.cartItems[itemIndex].cartQuantity =
+            state.cartItems[itemIndex].quantity_stock;
+          toast.error(`Max pet quantity can not buy more`, {
+            position: "top-right",
+          });
+          return;
+        } else state.cartItems[itemIndex].cartQuantity += 1;
+        console.log(itemIndex);
+        toast.info(`Increase pet quantity`, {
           position: "top-right",
         });
       } else {
@@ -88,7 +100,7 @@ const cartSlice = createSlice({
       );
       total = parseFloat(total.toFixed(2));
       state.cartTotalQuantity = quantity;
-      state.cartTotalAmount = total;
+      state.cartTotalAmout = total;
     },
   },
 });

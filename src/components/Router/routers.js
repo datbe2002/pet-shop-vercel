@@ -10,6 +10,7 @@ import HomePage from "../Home/HomePage";
 import PetDetailPage from "../Home/PetDetailPage";
 import SearchPage from "../Home/SearchPage";
 import PetCart from "../Cart/PetCart";
+import ProfileSetting from "../UserSection/ProfileSetting";
 
 export default function Router() {
   const element = useRoutes([
@@ -44,6 +45,10 @@ export default function Router() {
         {
           path: "/dashboard",
           element: <Dashboard />,
+        },
+        {
+          path: "/profile",
+          element: <ProfileSetting />,
         },
       ],
     },

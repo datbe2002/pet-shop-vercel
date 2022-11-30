@@ -154,18 +154,21 @@ export const logOut = async (navigate, dispatch) => {
   }
 };
 
-export const updateUser = async (dispatch, user) => {
+export const updateUser = async (dispatch, accessToken, user) => {
   dispatch(updateUserStart());
   try {
     const res = await axios.patch(
       `https://pet-shop-mini.herokuapp.com/api/user/update`,
-      user
+      user,
+      {
+        headers: { Authorization: "Bearer " + accessToken },
+      }
     );
     dispatch(updateUserSuccess(res.data));
     toast.success("Update this user successfully", {
       position: "top-right",
     });
-    // getAllUsers(process.env.TOKEN, dispatch);
+    getAllUsers(accessToken, dispatch);
   } catch (error) {
     dispatch(updateUserFailed(error.response.data));
     toast.error(error.response.data.message, {

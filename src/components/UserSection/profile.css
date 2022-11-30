@@ -1,0 +1,8 @@
+.profile__avatar {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.rounded-circle {
+  border-radius: 100px;
+}

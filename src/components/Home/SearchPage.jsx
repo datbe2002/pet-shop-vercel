@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import './searchpage.css'
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../../Redux/cartSlice';
 const SearchPage = () => {
 
 
@@ -19,11 +21,19 @@ const SearchPage = () => {
 
     };
 
+    const user = useSelector((state) => state.auth.login?.currentUser);
+
+    const dispatch = useDispatch()
+
     const handleSearch = (e) => {
         setSearchTerm(e.target.value)
         setPets([])
     }
 
+    const handleAddToCart = (pet) => {
+        dispatch(addToCart(pet))
+
+    }
 
     return (
         <Container sx={{ mt: 5 }}>
@@ -73,23 +83,60 @@ const SearchPage = () => {
                                             </Typography>
                                             <Button
                                                 sx={{
-                                                    backgroundColor: "#36454F",
+                                                    border: "1px solid black",
+                                                    marginRight: "2rem",
+                                                    transition: "0.5s",
+
                                                     "&:hover": {
-                                                        color: "white",
-                                                        backgroundColor: "#343434",
+                                                        transform: "translate(0, -5px)"
                                                     },
                                                 }}>
                                                 <Link
                                                     to={`/pet-detail/${pet.id}`}
                                                     style={{
-                                                        color: "white",
+                                                        color: "black",
                                                         fontWeight: "bold",
                                                         textDecoration: "none",
                                                     }}
                                                 >
-                                                    Read more
+                                                    View more
                                                 </Link>
                                             </Button>
+
+                                            {user ? (
+                                                <Button
+                                                    sx={{
+                                                        backgroundColor: "black",
+                                                        color: "white",
+                                                        fontWeight: "bold",
+                                                        textDecoration: "none",
+                                                        transition: "0.5s",
+                                                        "&:hover": {
+                                                            color: "white",
+                                                            backgroundColor: "#343434",
+                                                            transform: "translate(0, -5px)"
+                                                        },
+                                                    }} onClick={() => handleAddToCart(pet)}>
+                                                    Add to cart
+                                                </Button>
+                                            ) : (
+                                                <Button
+                                                    sx={{
+                                                        backgroundColor: "black",
+                                                        color: "white",
+                                                        fontWeight: "bold",
+                                                        textDecoration: "none",
+                                                        transition: "0.5s",
+                                                        "&:hover": {
+                                                            color: "white",
+                                                            backgroundColor: "#343434",
+                                                            transform: "translate(0, -5px)"
+                                                        },
+                                                    }} onClick={() => alert("Please login to buy")}>
+                                                    Add to cart
+                                                </Button>
+                                            )}
+
 
 
                                         </CardContent>
