@@ -72,7 +72,7 @@ const HomePage = () => {
                                             textDecoration: "none",
                                         }}
                                     >
-                                        View more
+                                        View more st
                                     </Link>
                                 </Button>
 
