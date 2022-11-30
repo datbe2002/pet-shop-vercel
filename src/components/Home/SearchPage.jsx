@@ -81,6 +81,9 @@ const SearchPage = () => {
                                             <Typography gutterBottom variant="h6" component="div">
                                                 {pet.name}
                                             </Typography>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                                {pet.price} $
+                                            </Typography>
                                             <Button
                                                 sx={{
                                                     border: "1px solid black",

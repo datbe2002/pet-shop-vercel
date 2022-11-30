@@ -37,7 +37,7 @@ const NavBar = () => {
     const navStyle = ({ isActive }) => {
         return {
             color: 'white',
-            borderBottom: isActive ? '2px solid white' : 'none',
+            borderBottom: isActive ? '3px solid white' : 'none',
             borderRadius: 'none'
         }
     }
